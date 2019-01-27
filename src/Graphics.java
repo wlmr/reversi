@@ -6,7 +6,7 @@ public class Graphics {
         System.out.println("    a   b   c   d   e   f   g   h  ");
         System.out.println("  ---------------------------------");
         for(int i = 0; i < Board.getBoardSize(); i++){
-           System.out.print(i +" |");
+           System.out.print(i + 1 +" |");
            for(int j = 0; j < Board.getBoardSize(); j++){
                System.out.print(' ');
                System.out.print(squareToChar(state[i][j]));

@@ -3,14 +3,14 @@ import java.util.ArrayList;
 public class Board {
 
 
-    private final static int BOARD__SIZE = 8;
+    private final static int BOARD_SIZE = 8;
     public final static int WHITE = 1;
     public final static int BLACK = -1;
     public final static int EMPTY = 0;
 
     public static int getBoardSize()
     {
-        return BOARD__SIZE;
+        return BOARD_SIZE;
     }
 
     private int [][] state;
@@ -25,9 +25,9 @@ public class Board {
     private void initState()
     {
         //TODO! add initial state which is not completely empty!
-        for(int i = 0; i < BOARD__SIZE; i++)
+        for(int i = 0; i < BOARD_SIZE; i++)
         {
-            for(int j = 0; j  < BOARD__SIZE; j++)
+            for(int j = 0; j  < BOARD_SIZE; j++)
             {
                 state[i][j] = EMPTY;
             }
@@ -47,8 +47,8 @@ public class Board {
 
     boolean outsideBounds(int row, int col)
     {
-        return row < 0 || row >= BOARD__SIZE ||
-                col < 0 || col >= BOARD__SIZE;
+        return row < 0 || row >= BOARD_SIZE ||
+                col < 0 || col >= BOARD_SIZE;
     }
 
 
@@ -84,7 +84,7 @@ public class Board {
         for(int dx = -1; dx <= 1; dx++) //horizontal delta
         {
             for(int dy = -1; dy <= 1; dy++) { //Vertical delta
-                boolean outside = outsideBounds(row + dx, col + dy);
+                boolean outside = outsideBounds(row + dy, col + dx);
                 if ((dx == 0 && dy == 0) || outside) continue;
                 if(existsLine(row + dy, col + dx, dx,dy, color)) return true;
             }
@@ -104,9 +104,9 @@ public class Board {
     public ArrayList<int []> getLegalMoves(int color)
     {
         ArrayList<int []> legalMoves = new ArrayList<>();
-        for(int row = 0; row < BOARD__SIZE; row++)
+        for(int row = 0; row < BOARD_SIZE; row++)
         {
-            for(int col = 0; col < BOARD__SIZE; col++){
+            for(int col = 0; col < BOARD_SIZE; col++){
                 if(isLegal(row, col, color)) legalMoves.add(new int []{row, col});
             }
         }
@@ -141,6 +141,7 @@ public class Board {
                 break;
             }
         }
+        if(outsideBounds(row, col)) return;
         for(int [] pair: foundFlips){
             invert(pair[0], pair[1]);
         }
@@ -172,16 +173,16 @@ public class Board {
 
 
     public Board(){
-        this.state = new int[BOARD__SIZE][BOARD__SIZE];
+        this.state = new int[BOARD_SIZE][BOARD_SIZE];
         initState();
     }
 
 
     public int count(int color) {
         int count = 0;
-        for(int i = 0; i < BOARD__SIZE; i++)
+        for(int i = 0; i < BOARD_SIZE; i++)
         {
-            for(int j= 0; j < BOARD__SIZE; j++)
+            for(int j = 0; j < BOARD_SIZE; j++)
             {
                 if(state[i][j] == color) count++;
             }
