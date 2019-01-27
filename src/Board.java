@@ -95,7 +95,7 @@ public class Board {
     public boolean setBrick(int row, int col, int color)
     {
         //Performs a few checks to see if the move is legal.
-        if(outsideBounds(row, col) ) return false;//|| !isLegal(row, col) || state[row][col] != EMPTY) return false;
+        if(outsideBounds(row, col)) return false;//|| !isLegal(row, col) || state[row][col] != EMPTY) return false;
         state[row][col] = color;
         update(row, col);
         return true;
@@ -156,7 +156,7 @@ public class Board {
         for(int dx = -1; dx <= 1; dx++){
             for(int dy = -1; dy <= 1; dy++)
             {
-                if(outsideBounds(row + dx, col + dy)) continue;
+                if(outsideBounds(row + dy, col + dx)) continue;
                 else if(dx == 0 && dy == 0) continue;;
                 performFlips(row + dy, col + dx, dx, dy, currentColor);
 
