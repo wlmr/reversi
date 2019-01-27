@@ -13,15 +13,25 @@ public class Human extends Player {
 
     private static int parseRow(String data)
     {
-        int row = (int) data.charAt(1) - (int) '0';
-        return row;
+        try{
+            int row = (int) data.charAt(1) - (int) '1';
+            return row;
+        } catch (StringIndexOutOfBoundsException s){
+            return -1;
+        }
+
     }
 
     private static int parseCol(String data)
     {
         int init = (int) 'a';
-        int charInt = (int) data.charAt(0);
-        return charInt - init;
+        try {
+            int charInt = (int) data.charAt(0);
+            return charInt - init;
+        }catch (StringIndexOutOfBoundsException s)
+        {
+            return -1;
+        }
     }
 
     private String getColorName()
@@ -33,10 +43,12 @@ public class Human extends Player {
     public void makeMove(Board b) {
         int row, col;
         boolean legalMove;
+        System.out.println("Your move, " + getColorName() + " human. (input on the format \"a4\")");
+        String input;
         do{
 
-            System.out.println("Your move, " + getColorName() + " human. (input on the format \"a4\")");
-            String input = scanner.nextLine();
+
+            input = scanner.nextLine();
             row = parseRow(input);
             col = parseCol(input);
             legalMove = b.isLegal(row, col, this.color);
@@ -45,6 +57,7 @@ public class Human extends Player {
             }
         }while(!legalMove);
         b.setBrick(row, col, this.color);
+        System.out.println(getColorName() + " brick added to " + input);
 
     }
 }

@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Board {
 
 
@@ -12,6 +14,12 @@ public class Board {
     }
 
     private int [][] state;
+
+
+    private static int getOppositeColor(int color)
+    {
+        return (color == WHITE) ? BLACK: WHITE;
+    }
 
 
     private void initState()
@@ -46,7 +54,7 @@ public class Board {
 
     private boolean existsLine(int row, int col, int dx, int dy, int color)
     {
-        int opposite = (color == WHITE) ? BLACK: WHITE;
+        int opposite = getOppositeColor(color);
         int nbrOpposites = 0;
         while(!outsideBounds(row, col))
         {
@@ -54,8 +62,8 @@ public class Board {
             if(currentSlot == EMPTY) return false;
             else if(currentSlot == opposite) nbrOpposites++;
             else if(currentSlot == color) return nbrOpposites > 0;
-            row = row + dx;
-            col = col + dy;
+            row = row + dy;
+            col = col + dx;
         }
         return false;
     }
@@ -72,13 +80,13 @@ public class Board {
      */
     public boolean isLegal(int row, int col, int color)
     {
-        if(state[row][col] != EMPTY) return false;
-        for(int i = -1; i <= 1; i++) //horizontal delta
+        if(outsideBounds(row, col) || state[row][col] != EMPTY) return false;
+        for(int dx = -1; dx <= 1; dx++) //horizontal delta
         {
-            for(int j = -1; j <= 1; j++) { //Vertical delta
-                boolean outside = outsideBounds(row + i, col + j);
-                if ((i == 0 && j == 0) || outside) continue;
-                if(existsLine(row + i, col + j, i,j, color)) return true;
+            for(int dy = -1; dy <= 1; dy++) { //Vertical delta
+                boolean outside = outsideBounds(row + dx, col + dy);
+                if ((dx == 0 && dy == 0) || outside) continue;
+                if(existsLine(row + dy, col + dx, dx,dy, color)) return true;
             }
         }
         return false;
@@ -89,9 +97,62 @@ public class Board {
         //Performs a few checks to see if the move is legal.
         if(outsideBounds(row, col) ) return false;//|| !isLegal(row, col) || state[row][col] != EMPTY) return false;
         state[row][col] = color;
+        update(row, col);
         return true;
     }
 
+
+    private void invert(int row, int col)
+    {
+        state[row][col] = getOppositeColor(state[row][col]);
+    }
+
+    private void performFlips(int row, int col, int dx, int dy, int color) {
+        ArrayList<int[]> foundFlips = new ArrayList<>();
+        final int oppositeColor = getOppositeColor(color);
+        while(!outsideBounds(row, col))
+        {
+            int currentBrick = state[row][col];
+            if(currentBrick == EMPTY){
+                return;
+            }
+            else if(currentBrick == oppositeColor) {
+                foundFlips.add(new int[]{row, col});
+                row = row + dy;
+                col = col + dx;
+            }
+            else{
+                break;
+            }
+        }
+        for(int [] pair: foundFlips){
+            invert(pair[0], pair[1]);
+        }
+    }
+
+
+    private void applyRules(int row, int col)
+    {
+        int currentColor = state[row][col];
+        if(currentColor == EMPTY) return;
+
+        for(int dx = -1; dx <= 1; dx++){
+            for(int dy = -1; dy <= 1; dy++)
+            {
+                if(outsideBounds(row + dx, col + dy)) continue;
+                else if(dx == 0 && dy == 0) continue;;
+                performFlips(row + dy, col + dx, dx, dy, currentColor);
+
+            }
+        }
+    }
+
+
+
+    private void update(int row, int col)
+    {
+        applyRules(row, col);
+    }
 
 
     public Board(){
