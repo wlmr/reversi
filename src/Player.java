@@ -1,7 +1,7 @@
 public abstract class Player {
 
     private static short nbrPlayers = 0;
-    private int color;
+    protected int color;
 
     public Player()
     {

@@ -1,9 +1,7 @@
 
 public class Main {
 
-
-
-    public static void main()
+    public static void main(String [] args)
     {
         runGame(new Human(), new Human());
     }
@@ -17,6 +15,7 @@ public class Main {
             {
                 if(b.gameOver()) break;
                 p.makeMove(b);
+                Graphics.draw(b);
             }
         }while(gameRunning);
     }
