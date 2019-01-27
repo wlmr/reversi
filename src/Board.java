@@ -11,23 +11,28 @@ public class Board {
         return BOARD__SIZE;
     }
 
-    private short [][] board;
+    private short [][] state;
 
 
-    private void initBoard()
+    private void initState()
     {
         for(int i = 0; i < BOARD__SIZE; i++)
         {
             for(int j = 0; j  < BOARD__SIZE; j++)
             {
-                board[i][j] = EMPTY;
+                state[i][j] = EMPTY;
             }
         }
     }
 
+    public short [][] getState()
+    {
+        return state;
+    }
+
     public Board(){
-        this.board = new short[BOARD__SIZE][BOARD__SIZE];
-        initBoard();
+        this.state = new short[BOARD__SIZE][BOARD__SIZE];
+        initState();
     }
 
     public boolean gameOver() {
