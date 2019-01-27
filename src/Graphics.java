@@ -24,4 +24,9 @@ public class Graphics {
                 return 'x';
         }
     }
+    //test
+    public static void main(String[] args){
+        Board beta = new Board();
+        draw(beta);
+    }
 }

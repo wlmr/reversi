@@ -24,6 +24,10 @@ public class Board {
                 state[i][j] = EMPTY;
             }
         }
+        state[3][3] = WHITE;
+        state[3][4] = BLACK;
+        state[4][3] = BLACK;
+        state[4][4] = WHITE;
     }
 
     public int [][] getState()
