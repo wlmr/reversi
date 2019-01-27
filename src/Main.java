@@ -10,9 +10,14 @@ public class Main {
 
     private static void runGame(Player black, Player white) {
         Board b = new Board();
-        while(!b.gameOver())
-        {
-
-        }
+        Player [] order = {black, white};
+        boolean gameRunning = true;
+        do{
+            for(Player p: order)
+            {
+                if(b.gameOver()) break;
+                p.makeMove(b);
+            }
+        }while(gameRunning);
     }
 }
