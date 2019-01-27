@@ -11,7 +11,7 @@ public class Board {
         return BOARD__SIZE;
     }
 
-    private short [][] state;
+    private int [][] state;
 
 
     private void initState()
@@ -26,7 +26,7 @@ public class Board {
         }
     }
 
-    public short [][] getState()
+    public int [][] getState()
     {
         return state;
     }
@@ -56,7 +56,7 @@ public class Board {
         return false;
     }
 
-    public boolean setBrick(int row, int col, short color)
+    public boolean setBrick(int row, int col, int color)
     {
         //Performs a few checks to see if the move is legal.
         if(outsideBounds(row, col) || !isLegal(row, col) || state[row][col] != EMPTY) return false;
@@ -67,7 +67,7 @@ public class Board {
 
 
     public Board(){
-        this.state = new short[BOARD__SIZE][BOARD__SIZE];
+        this.state = new int[BOARD__SIZE][BOARD__SIZE];
         initState();
     }
 
