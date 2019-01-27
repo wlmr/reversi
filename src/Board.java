@@ -59,7 +59,7 @@ public class Board {
     public boolean setBrick(int row, int col, int color)
     {
         //Performs a few checks to see if the move is legal.
-        if(outsideBounds(row, col) || !isLegal(row, col) || state[row][col] != EMPTY) return false;
+        if(outsideBounds(row, col) ) return false;//|| !isLegal(row, col) || state[row][col] != EMPTY) return false;
         state[row][col] = color;
         return true;
     }
