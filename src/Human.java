@@ -34,20 +34,16 @@ public class Human extends Player {
         }
     }
 
-    private String getColorName()
-    {
-        return (color == Board.WHITE) ? "white" : "black";
-    }
+
 
     @Override
     public void makeMove(Board b) {
         int row, col;
         boolean legalMove;
         System.out.println("Your move, " + getColorName() + " human. (input on the format \"a4\")");
+
         String input;
         do{
-
-
             input = scanner.nextLine();
             row = parseRow(input);
             col = parseCol(input);

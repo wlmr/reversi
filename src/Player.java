@@ -13,5 +13,12 @@ public abstract class Player {
         nbrPlayers++;
     }
 
+    public int getColor() {return color;}
+
+    public String getColorName()
+    {
+        return (color == Board.WHITE) ? "white" : "black";
+    }
+
     public abstract void makeMove(Board b);
 }

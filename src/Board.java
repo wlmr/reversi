@@ -101,6 +101,22 @@ public class Board {
         return true;
     }
 
+    public ArrayList<int []> getLegalMoves(int color)
+    {
+        ArrayList<int []> legalMoves = new ArrayList<>();
+        for(int row = 0; row < BOARD__SIZE; row++)
+        {
+            for(int col = 0; col < BOARD__SIZE; col++){
+                if(isLegal(row, col, color)) legalMoves.add(new int []{row, col});
+            }
+        }
+        return legalMoves;
+    }
+
+    public int getNbrLegalMoves(int color)
+    {
+        return getLegalMoves(color).size();
+    }
 
     private void invert(int row, int col)
     {
@@ -160,7 +176,16 @@ public class Board {
         initState();
     }
 
-    public boolean gameOver() {
-        return false;
+
+    public int count(int color) {
+        int count = 0;
+        for(int i = 0; i < BOARD__SIZE; i++)
+        {
+            for(int j= 0; j < BOARD__SIZE; j++)
+            {
+                if(state[i][j] == color) count++;
+            }
+        }
+        return count;
     }
 }
