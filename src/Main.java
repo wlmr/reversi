@@ -13,9 +13,10 @@ public class Main {
         do{
             for(Player p: order)
             {
+                Graphics.draw(b);
                 if(b.gameOver()) break;
                 p.makeMove(b);
-                Graphics.draw(b);
+
             }
         }while(gameRunning);
     }

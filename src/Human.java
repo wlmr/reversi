@@ -24,16 +24,26 @@ public class Human extends Player {
         return charInt - init;
     }
 
+    private String getColorName()
+    {
+        return (color == Board.WHITE) ? "white" : "black";
+    }
+
     @Override
     public void makeMove(Board b) {
         int row, col;
+        boolean legalMove;
         do{
-            System.out.println("Your move, human. (input on the format \"a4\")");
+
+            System.out.println("Your move, " + getColorName() + " human. (input on the format \"a4\")");
             String input = scanner.nextLine();
             row = parseRow(input);
             col = parseCol(input);
-
-        }while(!b.isLegal(row, col));
+            legalMove = b.isLegal(row, col, this.color);
+            if(!legalMove){
+                System.out.println("Illegal move.");
+            }
+        }while(!legalMove);
         b.setBrick(row, col, this.color);
 
     }
