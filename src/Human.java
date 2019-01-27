@@ -1,2 +1,2 @@
-public class Human implements Entity {
+public class Human implements Player {
 }

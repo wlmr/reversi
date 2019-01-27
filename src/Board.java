@@ -32,23 +32,36 @@ public class Board {
     }
 
 
+
+    private boolean outsideBounds(int row, int col)
+    {
+        return row >= 0 && row < BOARD__SIZE &&
+                col >= 0 && col < BOARD__SIZE;
+    }
+
     public boolean isLegal(int row, int col)
     {
         for(int i = -1; i < 1; i++)
         {
             for(int j = -1; j < 1; j++) {
-                if (i * j == 0) continue;
+                if (i * j == 0 || outsideBounds(row + i, col + j)) continue;
+                if(state[i][j] != EMPTY)
+                {
+                    return true;
+                }
 
             }
 
         }
-        return true;
+        return false;
     }
 
-    public void setBrick(int row, int col, short color)
+    public boolean setBrick(int row, int col, short color)
     {
         //Performs a few checks to see if the move is legal.
-
+        if(outsideBounds(row, col) || !isLegal(row, col) || state[row][col] != EMPTY) return false;
+        state[row][col] = color;
+        return true;
     }
 
 
