@@ -13,20 +13,28 @@ public class Human extends Player {
 
     private static int parseRow(String data)
     {
-        return 0;
+        String [] text = data.split(",");
+        int row = Integer.valueOf(text[1].trim());
+        return row;
     }
 
     private static int parseCol(String data)
     {
-        return 0;
+        String [] text = data.split(",");
+        int col = Integer.valueOf(text[0].trim());
+        return col;
     }
 
     @Override
     public void makeMove(Board b) {
-        boolean moveMade = false;
         int row = 0, col = 0;
         do{
+            System.out.println("Your move, human. (input on the format \"3, 4\")");
+            String input = scanner.nextLine();
+            row = parseRow(input);
+            col = parseCol(input);
 
-        }while(true);
+        }while(b.isLegal(row, col));
+
     }
 }

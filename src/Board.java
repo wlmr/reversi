@@ -45,10 +45,11 @@ public class Board {
 
     public boolean isLegal(int row, int col)
     {
+        if(state[row][col] != EMPTY) return false;
         for(int i = -1; i < 1; i++)
         {
             for(int j = -1; j < 1; j++) {
-                if (i * j == 0 || outsideBounds(row + i, col + j)) continue;
+                if (i * j != 0 || outsideBounds(row + i, col + j)) continue;
                 if(state[i][j] != EMPTY)
                 {
                     return true;
