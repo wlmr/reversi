@@ -165,6 +165,18 @@ public class Board {
     }
 
 
+    public int getPointSum(){
+        int count = 0;
+        for(int i = 0; i < BOARD_SIZE; i++)
+        {
+            for(int j = 0; j < BOARD_SIZE; j++)
+            {
+                count += state[i][j];
+            }
+        }
+        return count;
+    }
+
 
     private void update(int row, int col)
     {
