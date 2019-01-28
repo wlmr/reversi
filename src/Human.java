@@ -11,6 +11,12 @@ public class Human extends Player {
         this.scanner = new Scanner(System.in);
     }
 
+    public Human(int color){
+        super();
+        this.scanner = new Scanner(System.in);
+
+    }
+
     private static int parseRow(String data)
     {
         try{

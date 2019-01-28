@@ -3,7 +3,12 @@ public class Main {
 
     public static void main(String [] args)
     {
-        runGame(new Human(), new AI());
+            String[] player0 = args[0].split("=");
+            String[] player1 = args[1].split("=");
+            int color0 = player0[1].equals("w") ? 1 : -1;
+            int color1 = color0 == -1 ? 1 : -1;
+            runGame(player0[0].equals("ai") ? new AI(color0) : new Human(color0),
+                    player1[0].equals("ai") ? new AI(color1) : new Human(color1));
     }
 
     private static void runGame(Player black, Player white) {
