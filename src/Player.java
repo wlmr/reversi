@@ -20,5 +20,5 @@ public abstract class Player {
         return (color == Board.WHITE) ? "white" : "black";
     }
 
-    public abstract void makeMove(Board b);
+    public abstract void makeMove(Board b) throws InterruptedException;
 }

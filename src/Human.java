@@ -43,14 +43,18 @@ public class Human extends Player {
 
 
     @Override
-    public void makeMove(Board b) {
+    public void makeMove(Board b) throws InterruptedException {
         int row, col;
         boolean legalMove;
         System.out.println("Your move, " + getColorName() + " human. (input on the format \"a4\")");
 
         String input;
         do{
-            input = scanner.nextLine();
+            try{
+                input = scanner.nextLine();
+            } catch (Exception e){
+                throw new InterruptedException("Player pressed interrupt.");
+            }
             row = parseRow(input);
             col = parseCol(input);
             legalMove = b.isLegal(row, col, this.color);
