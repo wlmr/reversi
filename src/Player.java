@@ -1,5 +1,9 @@
 public abstract class Player {
 
+    public class KeyInterruptException extends Exception{
+
+    }
+
     private static short nbrPlayers = 0;
     protected int color;
 
@@ -20,5 +24,5 @@ public abstract class Player {
         return (color == Board.WHITE) ? "white" : "black";
     }
 
-    public abstract void makeMove(Board b) throws InterruptedException;
+    public abstract void makeMove(Board b) throws KeyInterruptException;
 }

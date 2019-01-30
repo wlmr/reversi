@@ -18,10 +18,11 @@ public class AI extends Player {
     public void makeMove(Board b) {
         Move m = s.calculateBestMove(b, this.color);
         if(m == null){
-            System.out.println("AI has no moves!");
+            System.out.println("AI " + getColorName() + " has no moves!");
         }
         else{
             b.setBrick(m.getRow(), m.getCol(), this.color);
+            System.out.println("AI " + getColorName() + " puts brick on " + Board.coordinatesToString(m.getRow(), m.getCol()));
         }
 
     }

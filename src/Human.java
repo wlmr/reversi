@@ -1,6 +1,9 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Human extends Player {
+
+
 
 
     private Scanner scanner;
@@ -43,17 +46,26 @@ public class Human extends Player {
 
 
     @Override
-    public void makeMove(Board b) throws InterruptedException {
+    public void makeMove(Board b) throws KeyInterruptException {
         int row, col;
         boolean legalMove;
         System.out.println("Your move, " + getColorName() + " human. (input on the format \"a4\")");
-
+        ArrayList<int []> possibleMoves = b.getLegalMoves(this.color);
+        if(possibleMoves.size() > 0)
+        {
+            int [] point = possibleMoves.get(0);
+            System.out.println("hint: you can put a brick on " + Board.coordinatesToString(point));
+        }
+        else{
+            System.out.println("Uh oh! Seems like player " + this.getColorName() + " is out of moves!");
+            return;
+        }
         String input;
         do{
             try{
                 input = scanner.nextLine();
             } catch (Exception e){
-                throw new InterruptedException("Player pressed interrupt.");
+                throw new KeyInterruptException();
             }
             row = parseRow(input);
             col = parseCol(input);

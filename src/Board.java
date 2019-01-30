@@ -18,8 +18,12 @@ public class Board {
     public static String coordinatesToString(int row, int col)
     {
         char cl = (char) (col + (int)'a');
-        char r = (char) (row + 1);
-        return String.valueOf(cl) + String.valueOf(r);
+        return String.valueOf(cl) + String.valueOf(row + 1);
+    }
+
+    public static String coordinatesToString(int []c)
+    {
+        return coordinatesToString(c[0], c[1]);
     }
 
 

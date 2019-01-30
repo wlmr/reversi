@@ -1,5 +1,11 @@
 public class Graphics {
 
+    //private static final char BLACK = 'o';
+    //private static final char WHITE = '●';
+    private static final char BLACK = 'x';
+    private static final char WHITE = 'o';
+    private static final char BLANK = ' ';
+
 
     public static void draw(Board b){
         int[][] state = b.getState();
@@ -20,11 +26,11 @@ public class Graphics {
     private static char squareToChar(int s) {
         switch (s) {
             case 1:
-                return '●';
+                return WHITE;
             case 0:
-                return ' ';
+                return BLANK;
             default:
-                return 'o';
+                return BLACK;
         }
     }
     //test
