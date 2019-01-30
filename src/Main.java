@@ -1,6 +1,31 @@
 
 public class Main {
 
+
+    private class GameRound implements Runnable{
+
+        private Board b;
+        private Player p;
+
+        public GameRound(Board b, Player p)
+        {
+            this.b = b;
+            this.p = p;
+        }
+
+        @Override
+        public void run() {
+            Graphics.draw(b);
+            int movesAvailable = b.getNbrLegalMoves(p.getColor());
+            if(movesAvailable > 0){
+                p.makeMove(b);
+            }
+            else{
+                System.out.println(p.getColorName() + " has no moves left!");
+            }
+        }
+    }
+
     public static void main(String [] args)
     {
 //            String[] player0 = args[0].split("=");
@@ -9,12 +34,16 @@ public class Main {
 //            int color1 = color0 == -1 ? 1 : -1;
 //            runGame(player0[0].equals("ai") ? new AI(color0) : new Human(color0),
 //                    player1[0].equals("ai") ? new AI(color1) : new Human(color1));
-        runGame(new AI(Board.BLACK), new AI(Board.WHITE));
+        runGame();
     }
 
-    private static void runGame(Player black, Player white) {
+    private static void runGame() {
+        int timeLimit = getTimeLimit();
+        Player black = initPlayer("black");
+        Player white = initPlayer("white");
         Board b = new Board();
         Player [] order = {black, white};
+
         int totalMoves, movesAvailable;
         do{
             totalMoves = 0;
@@ -39,10 +68,18 @@ public class Main {
             System.out.println("Black wins with " + blackCount + "-" + whiteCount);
         }else if(whiteCount > blackCount)
         {
-            System.out.println("White wins with " + blackCount + "-" + whiteCount);
+            System.out.println("White wins with " + whiteCount + "-" + blackCount);
         }
         else{
             System.out.println("Draw! " + blackCount + "-" + whiteCount);
         }
+    }
+
+    private static int getTimeLimit() {
+        return 0;
+    }
+
+    private static Player initPlayer(String color) {
+        return null;
     }
 }

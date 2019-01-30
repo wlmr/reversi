@@ -1,8 +1,10 @@
 import java.util.ArrayList;
 
-public class NaiveStrategy implements Strategy {
+public class NaiveStrategy extends Strategy {
 
-    private static final int DEPTH = 6;
+    public NaiveStrategy(int difficulty) {
+        super(difficulty);
+    }
 
     @Override
     public Move calculateBestMove(Board b, int color) {

@@ -2,9 +2,15 @@ public class AI extends Player {
 
     private Strategy s;
 
-    public AI(int color) {
+    static final int VERY_EASY = 1;
+    static final int EASY = 2;
+    static final int NORMAL = 4;
+    static final int HARD = 6;
+    static final int VERY_HARD = 8;
+
+    public AI(int color, int difficulty) {
         super();
-        s = new NaiveStrategy();
+        s = new PruningStrategy(difficulty);
         this.color = color;
     }
 
