@@ -7,10 +7,19 @@ public class Board {
     public final static int WHITE = 1;
     public final static int BLACK = -1;
     public final static int EMPTY = 0;
+
+    public final static int MAXIMIZING_PLAYER = WHITE;
     private int[][] state;
 
     public static int getBoardSize() {
         return BOARD_SIZE;
+    }
+
+    public static String coordinatesToString(int row, int col)
+    {
+        char cl = (char) (col + (int)'a');
+        char r = (char) (row + 1);
+        return String.valueOf(cl) + String.valueOf(r);
     }
 
 
@@ -25,7 +34,7 @@ public class Board {
     }
 
 
-    private static int getOppositeColor(int color) {
+    public static int getOppositeColor(int color) {
         return (color == WHITE) ? BLACK : WHITE;
     }
 
